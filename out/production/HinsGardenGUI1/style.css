@@ -1,0 +1,17 @@
+.mmbutton {
+    -fx-font-size: 20px;
+    -fx-border-radius: 25;
+    -fx-background-radius: 0;
+    -fx-background-color: #ff4500;
+    -fx-text-fill: white;
+    -fx-min-height: 80px;
+    -fx-max-height: 80px;
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+}
+.boxcolor{
+    -fx-background-color: darkred;
+}
+.altboxcolor{
+    -fx-background-color: bisque;
+}
