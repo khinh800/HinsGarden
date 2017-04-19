@@ -7,6 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://C:/Program Files/Microsoft JDBC Driver 6.0 for SQL Server/sqljdbc_6.0/enu/jre8" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/Program Files/Microsoft JDBC Driver 6.0 for SQL Server/sqljdbc_6.0/enu/jre8" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
-

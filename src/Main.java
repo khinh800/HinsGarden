@@ -34,23 +34,27 @@ public class Main extends Application{
 
         //THIS TRY/CATCH REQUIRES YOU TO HAVE A TABLE CALLED LOCATION AND A COLUMN IN IT CALLED ADDRESS
         //But you can edit the sql string to your specific needs if you want. :)
-//        try {
-//            Connection c = DataBaseConnection.connect();
-//            Statement stmt = c.createStatement();
-//            //Write an SQL query
-//            String SQL = "SELECT * FROM Location";
-//            //Runs query inside database
-//            ResultSet rs = stmt.executeQuery(SQL);
-//            //rs.next selects the next row.
-//            rs.next();
-//            //rs.getString gets the String on the row where the column is "Address"
-//            String first = rs.getString("Address");
-//            //prints it all out.
-//            System.out.println(first);
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            Connection c = DataBaseConnection.connect();
+            Statement stmt = c.createStatement();
+            //Write an SQL query
+            String SQL = "SELECT * FROM MenuItems";
+            //Runs query inside database
+            ResultSet rs = stmt.executeQuery(SQL);
+            //rs.next selects the next row.
+            for(int i = 0;i< 40;i++){
+                rs.next();
+                //rs.getString gets the String on the row where the column is "Address"
+                String first = rs.getString("ItemName");
+                String second = rs.getString("ItemPrice");
+                String third = rs.getString("ItemID");
+                //prints it all out.
+                System.out.println(first + "|" + second + "|" + third);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 //        //Typical stuff.
         launch(args);
     }

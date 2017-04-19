@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="HinsGarden_Database@localhost" uuid="a46b338c-0165-46a0-86ec-8ed57c1af4aa">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost\CoT-CIS3365-14:1433;databaseName=HinsGarden_Database</jdbc-url>
+    </data-source>
+  </component>
+</project>

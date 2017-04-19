@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="HinsGarden_Database@localhost" uuid="a46b338c-0165-46a0-86ec-8ed57c1af4aa">
+      <database-info product="Microsoft SQL Server" version="11.00.5058" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 6.0 for SQL Server" driver-version="6.0.8112.100">
+        <extra-name-characters>$#@</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>admin</user-name>
+      <resolve-scope>HinsGarden_Database:*</resolve-scope>
+    </data-source>
+  </component>
+</project>

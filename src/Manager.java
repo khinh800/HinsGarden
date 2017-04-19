@@ -13,6 +13,9 @@ import javafx.stage.Stage;
  */
 public class Manager {
     public static void managermenu() {
+        String SQL = "SELECT Employee.EmployeeFirstName, Employee.EmplyoeeLastName, EmployeeType.EmployeeType"
+                + " FROM Employee" +
+                "";
         Stage window = new Stage();
         BorderPane bp = new BorderPane();
         TabPane tabPane = new TabPane();
