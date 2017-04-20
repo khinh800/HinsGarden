@@ -161,6 +161,7 @@ public class PickupProcess {
                 String rslastname= rs.getString(4);
                 String rsaddress= rs.getString(5);
                 String rsapartment= rs.getString(6);
+                window.setScene(scene1);
 
                 if (rs != null && rs.next()){
                     //Find customer with that ID
@@ -168,14 +169,12 @@ public class PickupProcess {
                     lastname.setText(rslastname);
                     address.setText(rsaddress);
                     apartment.setText(rsapartment);
-                    window.setScene(scene1);
                     System.out.println("You found a number");
                     System.out.println(rs.getString(1)
                             + " " + rs.getString(2)
                             + " " + rs.getString(3)
                             + " " + rs.getString(4)
                             + " " + rs.getString(5));
-                    window.setScene(scene2);
 
                 }
                 else{
@@ -185,11 +184,8 @@ public class PickupProcess {
             }
             catch (Exception a){
                 a.printStackTrace();
-                System.out.println("Error, prob doesn't exist");
+                System.out.println("ERROR, there's a bit of an error ");
             }
-
-
-
         });
 
 
