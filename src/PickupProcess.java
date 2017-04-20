@@ -6,6 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,7 +24,7 @@ public class PickupProcess {
         Button btnsearch;
         TextField textsearch;
         GridPane display;
-        Scene scene,scene1,scene2;
+        Scene scene,scene1,scene2,scene3;
         Stage window = new Stage();
         display=new GridPane();
         enterphone=new Label("Search for Phone Number");
@@ -40,6 +41,7 @@ public class PickupProcess {
         display.setVgap(10);
         scene=new Scene(display,400,400);
         scene1=new Scene(display, 400,400);
+        scene2=new Scene(display, 400,400);
 
         window.setTitle("Pick-ups");
         window.initModality(Modality.APPLICATION_MODAL);
@@ -90,14 +92,19 @@ public class PickupProcess {
 
 
     }
+
+
+
+
     public static void Delivery(){
         Label enterphone,lbcustomer,lbphone,lbaddress;
         Button btnsearch;
         //THe text field to serach the phone number
         TextField textsearch;
-        GridPane display;
-        Scene scene;
+        GridPane display,customergrid;
+        Scene scene,scene1,scene2;
         Stage window = new Stage();
+
         display=new GridPane();
         enterphone=new Label("Search for Phone Number");
         btnsearch=new Button("Search");
@@ -113,6 +120,21 @@ public class PickupProcess {
         display.setVgap(10);
         scene=new Scene(display,400,500);
 
+        //Customer Grid
+        customergrid=new GridPane();
+        VBox fields = new VBox();
+        TextField firstname = new TextField();
+        TextField lastname = new TextField();
+        TextField address = new TextField();
+        TextField apartment = new TextField();
+        Button custsubmit = new Button("Submit");
+        fields.getChildren().addAll(firstname,lastname,address,apartment,custsubmit);
+        customergrid.add(fields,0,1);
+        scene1=new Scene(customergrid,400,500);
+
+        GridPane anothergrid = new GridPane();
+        scene2=new Scene(anothergrid, 400, 500);
+
         window.setTitle("Delivery");
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(scene);
@@ -124,7 +146,8 @@ public class PickupProcess {
             Connection c;
             try{
                 c = DataBaseConnection.connect();
-                String PhoneSearch = "SELECT cpn.customerphonenumberid, c.customerfirstname, c.customerlastname, ca.address "
+                String PhoneSearch = "SELECT cpn.customerphonenumberid, cpn.customerphonenumber, "
+                        + "c.customerfirstname, c.customerlastname, ca.address,ca.apartmentnumber"
                         + "FROM customerphonenumber as cpn "
                         + "INNER JOIN customer as c ON cpn.customerphonenumberID = c.customerphonenumberID "
                         + "INNER JOIN customeraddress as ca ON cpn.customerphonenumberid = ca.customerphonenumberid "
@@ -132,13 +155,30 @@ public class PickupProcess {
                 //customer- first name, last name, address, phone number
                 //customer order
                 ResultSet rs = c.createStatement().executeQuery(PhoneSearch);
+                int rsphoneid = rs.getInt(1);
+                Long rsphonenumber = Long.parseLong(rs.getString(2));
+                String rsfirstname= rs.getString(3);
+                String rslastname= rs.getString(4);
+                String rsaddress= rs.getString(5);
+                String rsapartment= rs.getString(6);
+
                 if (rs != null && rs.next()){
                     //Find customer with that ID
+                    firstname.setText(rsfirstname);
+                    lastname.setText(rslastname);
+                    address.setText(rsaddress);
+                    apartment.setText(rsapartment);
+                    window.setScene(scene1);
                     System.out.println("You found a number");
                     System.out.println(rs.getString(1)
                             + " " + rs.getString(2)
                             + " " + rs.getString(3)
-                            + " " + rs.getString(4));
+                            + " " + rs.getString(4)
+                            + " " + rs.getString(5));
+
+                    custsubmit.setOnAction(a -> {
+                        window.setScene(scene2);
+                    });
                 }
                 else{
                     //Create new customer

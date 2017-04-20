@@ -549,7 +549,7 @@ public class ViewReports {
         ButtGenOrdHist.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #aa6c8f");
+                + "-fx-background-color: #ee9ef2");
         Button ButtOrdPrice = new Button("Total Order\nPrice");
         ButtOrdPrice.setMinSize(150, 50);
         ButtOrdPrice.setMaxSize(100, 50);
@@ -563,7 +563,7 @@ public class ViewReports {
         ButtMoreOrder.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #aa6c8f");
+                + "-fx-background-color: #ee9ef2");
         Button ButtLessOrder = new Button("Days with\nLeast Orders");
         ButtLessOrder.setMinSize(150, 50);
         ButtLessOrder.setMaxSize(100, 50);
@@ -577,7 +577,7 @@ public class ViewReports {
         ButtBusyTime.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #aa6c8f");
+                + "-fx-background-color: #ee9ef2");
 
 
         BorderPane layout = new BorderPane();
