@@ -107,7 +107,7 @@ public class PickupProcess {
                 }
                 else{
                     //fill in the necessary data for this section based on info from the database
-                    System.out.println("You grab data from the database that matches the phone number and populate fields");
+                    System.out.println("You did not find a number ");
                 }
             }
             catch (Exception a){
