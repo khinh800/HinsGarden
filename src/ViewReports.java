@@ -24,7 +24,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import static com.sun.javafx.tools.resource.DeployResource.Type.data;
 
 public class ViewReports {
     private static ObservableList<ObservableList> data;
@@ -132,7 +131,7 @@ public class ViewReports {
         dropShadow.setColor(Color.color(0.2, 0.2, 0.2));
 
         ButtGenTick.setEffect(dropShadow);
-        ButtGenTick.setOnAction(e -> GeneralReps());
+        ButtGenTick.setOnAction(e -> SalesRep());
         ButtGenTick.setMinSize(200, 125);
         ButtGenTick.setMaxSize(100, 100);
         ButtGenTick.setStyle(""
@@ -142,7 +141,7 @@ public class ViewReports {
 
 
         ButtEmpRep.setEffect(dropShadow);
-        ButtEmpRep.setOnAction(e -> EmpReports());
+        ButtEmpRep.setOnAction(e -> CustReports());
         ButtEmpRep.setPadding(new Insets(0, 30, 0, 30));
         ButtEmpRep.setMinSize(200, 125);
         ButtEmpRep.setMaxSize(100, 100);
@@ -152,7 +151,7 @@ public class ViewReports {
                 + "-fx-background-color: #8fb96f");
 
         ButtLocRep.setEffect(dropShadow);
-        ButtLocRep.setOnAction(e -> EmpReports());
+        ButtLocRep.setOnAction(e -> OrderReports());
         ButtLocRep.setMinSize(200, 125);
         ButtLocRep.setMaxSize(100, 100);
         ButtLocRep.setStyle(""
@@ -193,7 +192,7 @@ public class ViewReports {
         Scene SceneEmp = new Scene(EmpLayout, 950, 600);
     }
 
-    public static void GeneralReps() {
+    public static void SalesRep() {
 
         Stage window = new Stage();
         Label GeneralLocs = new Label("Location Reports");
@@ -281,8 +280,8 @@ public class ViewReports {
         window.show();
 
     }
-
-    public static void EmpReports() {
+//Show customer Report
+    public static void CustReports() {
 
         Stage window = new Stage();
         Label GeneralLocs = new Label("Location Reports");

@@ -63,6 +63,7 @@ public class PickupProcess {
     public static void Delivery(){
         Label enterphone,lbcustomer,lbphone,lbaddress;
         Button btnsearch;
+        //THe text field to serach the phone number
         TextField textsearch;
         GridPane display;
         Scene scene;
@@ -93,21 +94,25 @@ public class PickupProcess {
             Connection c;
             try{
                 c = DataBaseConnection.connect();
-                String PhoneSearch = "SELECT cpn.customerphonenumberid "
+                String PhoneSearch = "SELECT cpn.customerphonenumberid, c.customerfirstname, c.customerlastname, ca.address "
                         + "FROM customerphonenumber as cpn "
                         + "INNER JOIN customer as c ON cpn.customerphonenumberID = c.customerphonenumberID "
-                        + "INNER JOIN customeraddress as ca ON cpn.customerphonenumberid = ca.customerphoennumberid "
-                        + "WHERE cpn.customerphonenumber = %" + phonenumber +"%";
+                        + "INNER JOIN customeraddress as ca ON cpn.customerphonenumberid = ca.customerphonenumberid "
+                        + "WHERE cpn.customerphonenumber = '" + phonenumber +"' ";
                 //customer- first name, last name, address, phone number
                 //customer order
                 ResultSet rs = c.createStatement().executeQuery(PhoneSearch);
-                if (!rs.isBeforeFirst()){
-                    //leave this scene section blank, fill in all that is required
-                    System.out.println("You will display empty fields");
+                if (rs != null && rs.next()){
+                    //Find customer with that ID
+                    System.out.println("You found a number");
+                    System.out.println(rs.getString(1)
+                            + " " + rs.getString(2)
+                            + " " + rs.getString(3)
+                            + " " + rs.getString(4));
                 }
                 else{
-                    //fill in the necessary data for this section based on info from the database
-                    System.out.println("You did not find a number ");
+                    //Create new customer
+                    System.out.println("You found a number ");
                 }
             }
             catch (Exception a){
