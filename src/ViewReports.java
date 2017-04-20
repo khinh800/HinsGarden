@@ -231,7 +231,7 @@ public class ViewReports {
 
         window.setTitle("Hin's Garden");
         window.initModality(Modality.APPLICATION_MODAL);
-        layout.setStyle("-fx-background-color: ffd773");
+        layout.setStyle("-fx-background-color: antiquewhite");
         GeneralLocs.setStyle("-fx-font-size: 40;");
         GeneralLocs.setPadding(new Insets(30, 30, 30, 30));
 
@@ -334,7 +334,7 @@ public class ViewReports {
 
         window.setTitle("Update Locations");
         window.initModality(Modality.APPLICATION_MODAL);
-        layout.setStyle("-fx-background-color: ffd773");
+        layout.setStyle("-fx-background-color: antiquewhite");
         GeneralLocs.setStyle("-fx-font-size: 40;");
         GeneralLocs.setPadding(new Insets(30, 30, 30, 30));
 
@@ -383,7 +383,7 @@ public class ViewReports {
     }
 
     public static void OrderReports() {
-        String OrderHistory = "SELECT ItemName, ItemPrice, OrderType, OrderTime, OrderDate, CustomerFirstName, CustomerLastName "
+        String OrderHistory = "SELECT ItemName, ItemPrice, OrderType, OrderTime, OrderDate, (CustomerFirstName+' '+CustomerLastName) AS CustomerName "
                 + "FROM MenuItems as mn INNER JOIN OrderList as ol "
                 + "ON mn.MenuItemID = ol.MenuItemID "
                 + "INNER JOIN CustomerOrder as Custo "
@@ -392,6 +392,17 @@ public class ViewReports {
                 + "ON Custo.CustomerPhoneNumberID = custp.CustomerPhoneNumberID "
                 + "INNER JOIN Customer as cust "
                 + "ON custp.CustomerID = cust.CustomerID ";
+        String TotalOrderPrice = "SELECT  SUM (mn.ItemPrice) as TOTALofOrderPrice, CustomerFirstName, CustomerLastName "
+                + "FROM MenuItems as mn INNER JOIN OrderList as ol "
+                + "ON mn.MenuItemID = ol.MenuItemID "
+                + "INNER JOIN CustomerOrder as Custo "
+                + "on ol.CustomerOrderID = Custo.CustomerOrderID "
+                + "INNER JOIN CustomerPhoneNumber as custp "
+                + "ON Custo.CustomerPhoneNumberID = custp.CustomerPhoneNumberID "
+                + "INNER JOIN Customer as cust "
+                + "ON custp.CustomerID = cust.CustomerID "
+                + "GROUP BY mn.ItemPrice, cust.CustomerFirstName, cust.CustomerLastName "
+                + "ORDER BY TOTALofOrderPrice DESC ";
 
 
         Stage window = new Stage();
@@ -399,28 +410,36 @@ public class ViewReports {
         Label RandomInfo = new Label("<- Pick a report to view");
         RandomInfo.setStyle("-fx-font-size: 20;");
 
-        Button ButtGenOrdHist = new Button("General Location \nInformation");
+        Button ButtGenOrdHist = new Button("General Order \nHistory");
         ButtGenOrdHist.setMinSize(150, 50);
         ButtGenOrdHist.setMaxSize(100, 50);
         ButtGenOrdHist.setStyle(""
                 + "-fx-font-size: 13px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #C06A45");
-        Button ButtEmpSchedule = new Button("Location Employees");
-        ButtEmpSchedule.setMinSize(150, 50);
-        ButtEmpSchedule.setMaxSize(100, 50);
-        ButtEmpSchedule.setStyle(""
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #ed855c");
+        Button ButtOrdPrice = new Button("Location Employees");
+        ButtOrdPrice.setMinSize(150, 50);
+        ButtOrdPrice.setMaxSize(100, 50);
+        ButtOrdPrice.setStyle(""
                 + "-fx-font-size: 11px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #B96F6F");
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #ed6031");
         Button ButtLocSales = new Button("Location \n"
                 + "Costs & Sales");
         ButtLocSales.setMinSize(150, 50);
         ButtLocSales.setMaxSize(100, 50);
         ButtLocSales.setStyle(""
                 + "-fx-font-size: 13px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #C98A4B");
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #ed855c");
+        Button ButtOrderDay = new Button("Location \n"
+                + "Costs & Sales");
+        ButtOrderDay.setMinSize(150, 50);
+        ButtOrderDay.setMaxSize(100, 50);
+        ButtOrderDay.setStyle(""
+                + "-fx-font-size: 13px;"
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #ed855c");
 
 
         BorderPane layout = new BorderPane();
@@ -432,7 +451,7 @@ public class ViewReports {
 
         window.setTitle("Update Locations");
         window.initModality(Modality.APPLICATION_MODAL);
-        layout.setStyle("-fx-background-color: ffd773");
+        layout.setStyle("-fx-background-color: antiquewhite");
         GeneralLocs.setStyle("-fx-font-size: 40;");
         GeneralLocs.setPadding(new Insets(30, 30, 30, 30));
 
@@ -442,13 +461,13 @@ public class ViewReports {
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        ButtEmpSchedule.setOnAction(e -> {
+        ButtOrdPrice.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(TotalOrderEachCust);
+            buildData(TotalOrderPrice);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        Left.getChildren().addAll(ButtGenOrdHist, ButtEmpSchedule, ButtLocSales);
+        Left.getChildren().addAll(ButtGenOrdHist, ButtOrdPrice, ButtLocSales,ButtOrderDay);
 
         VBox Right = new VBox();
         Label Stuff = new Label("                 ");
@@ -464,7 +483,7 @@ public class ViewReports {
         Close.setPrefWidth(100);
         Close.setStyle(""
                 + "-fx-font-size: 20px;"
-                + "-fx-background-radius:50; "
+                + "-fx-background-radius:10; "
                 + "-fx-background-color: #ff6961 ");
         Bottom.getChildren().add(Close);
         layout.setBottom(Bottom);
