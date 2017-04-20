@@ -175,10 +175,8 @@ public class PickupProcess {
                             + " " + rs.getString(3)
                             + " " + rs.getString(4)
                             + " " + rs.getString(5));
+                    window.setScene(scene2);
 
-                    custsubmit.setOnAction(a -> {
-                        window.setScene(scene2);
-                    });
                 }
                 else{
                     //Create new customer
