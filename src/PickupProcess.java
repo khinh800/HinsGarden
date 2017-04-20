@@ -23,7 +23,7 @@ public class PickupProcess {
         Button btnsearch;
         TextField textsearch;
         GridPane display;
-        Scene scene;
+        Scene scene,scene1,scene2;
         Stage window = new Stage();
         display=new GridPane();
         enterphone=new Label("Search for Phone Number");
@@ -38,7 +38,8 @@ public class PickupProcess {
         display.setAlignment(Pos.CENTER);
         display.setHgap(10);
         display.setVgap(10);
-        scene=new Scene(display,400,500);
+        scene=new Scene(display,400,400);
+        scene1=new Scene(display, 400,400);
 
         window.setTitle("Pick-ups");
         window.initModality(Modality.APPLICATION_MODAL);
@@ -47,15 +48,44 @@ public class PickupProcess {
 
 
         btnsearch.setOnAction(e-> {
-            boolean customerexist=false;
-            if (customerexist == false){
-                //leave this scene section blank, fill in all that is required
-                System.out.println("You will display empty fields");
+            long phonenumber = Long.parseLong(textsearch.getText());
+            Connection c;
+            try{
+                c = DataBaseConnection.connect();
+                String PhoneSearch = "SELECT cpn.customerphonenumberid, cpn.CustomerPhoneNumber, " +
+                        "c.customerfirstname, c.customerlastname, ca.address "
+                        + "FROM customerphonenumber as cpn "
+                        + "INNER JOIN customer as c ON cpn.customerphonenumberID = c.customerphonenumberID "
+                        + "INNER JOIN customeraddress as ca ON cpn.customerphonenumberid = ca.customerphonenumberid "
+                        + "WHERE cpn.customerphonenumber = '" + phonenumber +"' ";
+                //customer- first name, last name, address, phone number
+                //customer order
+                ResultSet rs = c.createStatement().executeQuery(PhoneSearch);
+                String cust1 = rs.getString(1);
+                String cust2 = rs.getString(2);
+                String cust3 = rs.getString(3);
+                String cust4 = rs.getString(4);
+                String cust5 = rs.getString(5);
+
+                if (rs != null && rs.next()){
+                    window.setScene(scene1);
+                    //Find customer with that ID
+                    System.out.println("You found a number");
+                    System.out.println(cust1
+                            + " " + cust2
+                            + " " + cust3
+                            + " " + cust4);
+                }
+                else{
+                    //Create new customer
+                    System.out.println("You found a number ");
+                }
             }
-            else{
-                //fill in the necessary data for this section based on info from the database
-                System.out.println("You grab data from the database that matches the phone number and populate fields");
+            catch (Exception a){
+                a.printStackTrace();
+                System.out.println("Error, prob doesn't exist");
             }
+
         });
 
 
@@ -83,7 +113,7 @@ public class PickupProcess {
         display.setVgap(10);
         scene=new Scene(display,400,500);
 
-        window.setTitle("Pick-ups");
+        window.setTitle("Delivery");
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(scene);
         window.show();

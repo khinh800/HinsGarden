@@ -194,32 +194,127 @@ public class ViewReports {
 
     public static void SalesRep() {
 // Create buttons
+        String MoneyDay = "SELECT Distinct sum (itemprice) as TotalProfitofaDay "
+                + "FROM ManagerType as mt INNER JOIN Manager as m "
+                + "ON mt.ManagerTypeID = m.ManagerTypeID "
+                + "INNER JOIN Employee as emp "
+                + "ON m.ManagerID = emp.ManagerID "
+                + "INNER JOIN EmployeeType as empt "
+                + "ON emp.EmployeeTypeID = empt.EmployeeTypeID "
+                + "INNER JOIN CustomerOrder as co "
+                + "ON emp.EmployeeID = co.EmployeeID "
+                + "INNER JOIN CustomerPhoneNumber as cp "
+                + "ON co.CustomerPhoneNumberID = cp.CustomerPhoneNumberID "
+                + "INNER JOIN CustomerAddress as ca "
+                + "ON cp.CustomerPhoneNumberID = ca.CustomerPhoneNumberID "
+                + "INNER JOIN OrderList as ol "
+                + "ON co.CustomerOrderID = ol.CustomerOrderID "
+                + "INNER JOIN MenuItems as mi "
+                + "ON ol.MenuItemID = mi.MenuItemID "
+                + "INNER JOIN Customer as c "
+                + "ON c.CustomerID = cp.CustomerID	"
+                + "WHERE co.OrderDate ='2017-01-01' "
+                + "ORDER By TotalProfitofaDay ";
+        String MoneyWeek = "SELECT Distinct sum (itemprice) as TotalProfitofaWeek "
+                + "FROM ManagerType as mt INNER JOIN Manager as m "
+                + "ON mt.ManagerTypeID = m.ManagerTypeID "
+                + "INNER JOIN Employee as emp "
+                + "ON m.ManagerID = emp.ManagerID "
+                + "INNER JOIN EmployeeType as empt "
+                + "ON emp.EmployeeTypeID = empt.EmployeeTypeID "
+                + "INNER JOIN CustomerOrder as co "
+                + "ON emp.EmployeeID = co.EmployeeID "
+                + "INNER JOIN CustomerPhoneNumber as cp "
+                + "ON co.CustomerPhoneNumberID = cp.CustomerPhoneNumberID "
+                + "INNER JOIN CustomerAddress as ca "
+                + "ON cp.CustomerPhoneNumberID = ca.CustomerPhoneNumberID "
+                + "INNER JOIN OrderList as ol "
+                + "ON co.CustomerOrderID = ol.CustomerOrderID "
+                + "INNER JOIN MenuItems as mi "
+                + "ON ol.MenuItemID = mi.MenuItemID "
+                + "INNER JOIN Customer as c "
+                + "ON c.CustomerID = cp.CustomerID	"
+                + "WHERE co.OrderDate BETWEEN '2017-01-01' AND '2017-01-07' "
+                + "ORDER By TotalProfitofaWeek ";
+        String MoneyMonth = "SELECT Distinct sum (itemprice) as TotalProfitofaMonth "
+                + "FROM ManagerType as mt INNER JOIN Manager as m "
+                + "ON mt.ManagerTypeID = m.ManagerTypeID "
+                + "INNER JOIN Employee as emp "
+                + "ON m.ManagerID = emp.ManagerID "
+                + "INNER JOIN EmployeeType as empt "
+                + "ON emp.EmployeeTypeID = empt.EmployeeTypeID "
+                + "INNER JOIN CustomerOrder as co "
+                + "ON emp.EmployeeID = co.EmployeeID "
+                + "INNER JOIN CustomerPhoneNumber as cp "
+                + "ON co.CustomerPhoneNumberID = cp.CustomerPhoneNumberID "
+                + "INNER JOIN CustomerAddress as ca "
+                + "ON cp.CustomerPhoneNumberID = ca.CustomerPhoneNumberID "
+                + "INNER JOIN OrderList as ol "
+                + "ON co.CustomerOrderID = ol.CustomerOrderID "
+                + "INNER JOIN MenuItems as mi "
+                + "ON ol.MenuItemID = mi.MenuItemID "
+                + "INNER JOIN Customer as c "
+                + "ON c.CustomerID = cp.CustomerID	"
+                + "WHERE co.OrderDate BETWEEN '2017-01-01' AND '2017-01-31' "
+                + "ORDER By TotalProfitofaMonth ";
+        String MoneyYear = "SELECT Distinct sum (itemprice) as TotalProfitofaYear "
+                + "FROM ManagerType as mt INNER JOIN Manager as m "
+                + "ON mt.ManagerTypeID = m.ManagerTypeID "
+                + "INNER JOIN Employee as emp "
+                + "ON m.ManagerID = emp.ManagerID "
+                + "INNER JOIN EmployeeType as empt "
+                + "ON emp.EmployeeTypeID = empt.EmployeeTypeID "
+                + "INNER JOIN CustomerOrder as co "
+                + "ON emp.EmployeeID = co.EmployeeID "
+                + "INNER JOIN CustomerPhoneNumber as cp "
+                + "ON co.CustomerPhoneNumberID = cp.CustomerPhoneNumberID "
+                + "INNER JOIN CustomerAddress as ca "
+                + "ON cp.CustomerPhoneNumberID = ca.CustomerPhoneNumberID "
+                + "INNER JOIN OrderList as ol "
+                + "ON co.CustomerOrderID = ol.CustomerOrderID "
+                + "INNER JOIN MenuItems as mi "
+                + "ON ol.MenuItemID = mi.MenuItemID "
+                + "INNER JOIN Customer as c "
+                + "ON c.CustomerID = cp.CustomerID	"
+                + "WHERE co.OrderDate BETWEEN '2017-01-01' AND '2017-12-31' "
+                + "ORDER By TotalProfitofaYear ";
+
         Stage window = new Stage();
         Label GeneralLocs = new Label("Sales Reports");
         Label RandomInfo = new Label("Select one of the columns");
         RandomInfo.setStyle("-fx-font-size: 20;");
 
-        Button ButtTotPrice = new Button("Total Price for\nEach Order");
-        ButtTotPrice.setMinSize(150, 50);
-        ButtTotPrice.setMaxSize(100, 50);
-        ButtTotPrice.setStyle(""
+        //=========Buttons set up for time
+        Button ButtDay = new Button("Total Profit\n by Day");
+        ButtDay.setMinSize(150, 50);
+        ButtDay.setMaxSize(100, 50);
+        ButtDay.setStyle(""
                 + "-fx-font-size: 13px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #C06A45");
-        Button ButtEmpSchedule = new Button("Location Employees");
-        ButtEmpSchedule.setMinSize(150, 50);
-        ButtEmpSchedule.setMaxSize(100, 50);
-        ButtEmpSchedule.setStyle(""
-                + "-fx-font-size: 11px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #B96F6F");
-        Button ButtLocSales = new Button("Location \n" + "Costs & Sales");
-        ButtLocSales.setMinSize(150, 50);
-        ButtLocSales.setMaxSize(100, 50);
-        ButtLocSales.setStyle(""
+                + "-fx-background-radius:10; "
+                + "-fx-background-color: #7adce2");
+        Button ButtWeek = new Button("Total Profit\n by Week");
+        ButtWeek.setMinSize(150, 50);
+        ButtWeek.setMaxSize(100, 50);
+        ButtWeek.setStyle(""
                 + "-fx-font-size: 13px;"
-                + "-fx-background-radius:100; "
-                + "-fx-background-color: #C98A4B");
+                + "-fx-background-radius:10; "
+                + "-fx-background-color: #84bde2");
+        Button ButtMonth = new Button("Total Profit\n by Month");
+        ButtMonth.setMinSize(150, 50);
+        ButtMonth.setMaxSize(100, 50);
+        ButtMonth.setStyle(""
+                + "-fx-font-size: 13px;"
+                + "-fx-background-radius:10; "
+                + "-fx-background-color: #7adce2");
+        Button ButtYear = new Button("Total Profit\n by Year");
+        ButtYear.setMinSize(150, 50);
+        ButtYear.setMaxSize(100, 50);
+        ButtYear.setStyle(""
+                + "-fx-font-size: 13px;"
+                + "-fx-background-radius:10; "
+                + "-fx-background-color: #84bde2");
+
+
 
 
         BorderPane layout = new BorderPane();
@@ -236,32 +331,32 @@ public class ViewReports {
         GeneralLocs.setPadding(new Insets(30, 30, 30, 30));
 
         //=======PERFORM BUTTON ACTION, make tables
-        ButtTotPrice.setOnAction(e -> {
+        ButtDay.setOnAction(e -> {
             tableview = new TableView();
 //            buildData(OrderHistory);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        ButtEmpSchedule.setOnAction(e -> {
+        ButtWeek.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(TotalOrderEachCust);
+//            buildData(OrderHistory);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        ButtEmpSchedule.setOnAction(e -> {
+        ButtMonth.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(TotalOrderEachCust);
+//            buildData(OrderHistory);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        ButtEmpSchedule.setOnAction(e -> {
+        ButtYear.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(TotalOrderEachCust);
+//            buildData(OrderHistory);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
 
-        Left.getChildren().addAll(ButtTotPrice, ButtEmpSchedule, ButtLocSales);
+        Left.getChildren().addAll(ButtDay, ButtWeek, ButtMonth, ButtYear);
 
         VBox Right = new VBox();
         Label Stuff = new Label("                 ");
@@ -403,43 +498,86 @@ public class ViewReports {
                 + "ON custp.CustomerID = cust.CustomerID "
                 + "GROUP BY mn.ItemPrice, cust.CustomerFirstName, cust.CustomerLastName "
                 + "ORDER BY TOTALofOrderPrice DESC ";
-
+        String DaysMostOrd = "SELECT  COUNT (Custo.OrderDate) as DaywithMostOrders, Custo.OrderDate "
+                + "FROM MenuItems as mn INNER JOIN OrderList as ol "
+                + "ON mn.MenuItemID = ol.MenuItemID "
+                + "INNER JOIN CustomerOrder as Custo "
+                + "on ol.CustomerOrderID = Custo.CustomerOrderID "
+                + "INNER JOIN CustomerPhoneNumber as custp "
+                + "ON Custo.CustomerPhoneNumberID = custp.CustomerPhoneNumberID "
+                + "INNER JOIN Customer as cust "
+                + "ON custp.CustomerID = cust.CustomerID "
+                + "INNER JOIN Employee as emp "
+                + "ON Custo.EmployeeID = emp.EmployeeID "
+                + "Group By Custo.OrderDate,Custo.OrderDate "
+                + "ORDER BY DaywithMostOrders Desc ";
+        String DayLessOrd = "SELECT  COUNT (Custo.OrderDate) as DaywithLeastOrders, Custo.OrderDate "
+                + "FROM MenuItems as mn INNER JOIN OrderList as ol "
+                + "ON mn.MenuItemID = ol.MenuItemID "
+                + "INNER JOIN CustomerOrder as Custo "
+                + "on ol.CustomerOrderID = Custo.CustomerOrderID "
+                + "INNER JOIN CustomerPhoneNumber as custp "
+                + "ON Custo.CustomerPhoneNumberID = custp.CustomerPhoneNumberID "
+                + "INNER JOIN Customer as cust "
+                + "ON custp.CustomerID = cust.CustomerID "
+                + "INNER JOIN Employee as emp "
+                + "ON Custo.EmployeeID = emp.EmployeeID "
+                + "Group By Custo.OrderDate,Custo.OrderDate "
+                + "ORDER BY DaywithLeastOrders Asc ";
+        String BusyTimeDay = "SELECT  COUNT (Custo.OrderTime) as Busytime, Custo.OrderTime "
+                + "FROM MenuItems as mn INNER JOIN OrderList as ol "
+                + "ON mn.MenuItemID = ol.MenuItemID "
+                + "INNER JOIN CustomerOrder as Custo "
+                + "on ol.CustomerOrderID = Custo.CustomerOrderID "
+                + "INNER JOIN CustomerPhoneNumber as custp "
+                + "ON Custo.CustomerPhoneNumberID = custp.CustomerPhoneNumberID "
+                + "INNER JOIN Customer as cust "
+                + "ON custp.CustomerID = cust.CustomerID "
+                + "INNER JOIN Employee as emp "
+                + "ON Custo.EmployeeID = emp.EmployeeID "
+                + "Group By Custo.OrderTime,Custo.OrderTime "
+                + "ORDER BY Busytime Desc ";
 
         Stage window = new Stage();
         Label GeneralLocs = new Label("Order Reports");
         Label RandomInfo = new Label("<- Pick a report to view");
         RandomInfo.setStyle("-fx-font-size: 20;");
 
-        Button ButtGenOrdHist = new Button("General Order \nHistory");
+        Button ButtGenOrdHist = new Button("General Order\nHistory");
         ButtGenOrdHist.setMinSize(150, 50);
         ButtGenOrdHist.setMaxSize(100, 50);
         ButtGenOrdHist.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #ed855c");
-        Button ButtOrdPrice = new Button("Location Employees");
+                + "-fx-background-color: #aa6c8f");
+        Button ButtOrdPrice = new Button("Total Order\nPrice");
         ButtOrdPrice.setMinSize(150, 50);
         ButtOrdPrice.setMaxSize(100, 50);
         ButtOrdPrice.setStyle(""
-                + "-fx-font-size: 11px;"
-                + "-fx-background-radius:5; "
-                + "-fx-background-color: #ed6031");
-        Button ButtLocSales = new Button("Location \n"
-                + "Costs & Sales");
-        ButtLocSales.setMinSize(150, 50);
-        ButtLocSales.setMaxSize(100, 50);
-        ButtLocSales.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #ed855c");
-        Button ButtOrderDay = new Button("Location \n"
-                + "Costs & Sales");
-        ButtOrderDay.setMinSize(150, 50);
-        ButtOrderDay.setMaxSize(100, 50);
-        ButtOrderDay.setStyle(""
+                + "-fx-background-color: #c07aa3");
+        Button ButtMoreOrder = new Button("Days with\nMost Orders");
+        ButtMoreOrder.setMinSize(150, 50);
+        ButtMoreOrder.setMaxSize(100, 50);
+        ButtMoreOrder.setStyle(""
                 + "-fx-font-size: 13px;"
                 + "-fx-background-radius:5; "
-                + "-fx-background-color: #ed855c");
+                + "-fx-background-color: #aa6c8f");
+        Button ButtLessOrder = new Button("Days with\nLeast Orders");
+        ButtLessOrder.setMinSize(150, 50);
+        ButtLessOrder.setMaxSize(100, 50);
+        ButtLessOrder.setStyle(""
+                + "-fx-font-size: 13px;"
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #c07aa3");
+        Button ButtBusyTime = new Button("Busiest \nTimes");
+        ButtBusyTime.setMinSize(150, 50);
+        ButtBusyTime.setMaxSize(100, 50);
+        ButtBusyTime.setStyle(""
+                + "-fx-font-size: 13px;"
+                + "-fx-background-radius:5; "
+                + "-fx-background-color: #aa6c8f");
 
 
         BorderPane layout = new BorderPane();
@@ -467,7 +605,26 @@ public class ViewReports {
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
-        Left.getChildren().addAll(ButtGenOrdHist, ButtOrdPrice, ButtLocSales,ButtOrderDay);
+        ButtMoreOrder.setOnAction(e -> {
+            tableview = new TableView();
+            buildData(DaysMostOrd);
+            CenterValue.getChildren().clear();
+            CenterValue.getChildren().addAll(tableview);
+        });
+        ButtLessOrder.setOnAction(e -> {
+            tableview = new TableView();
+            buildData(DayLessOrd);
+            CenterValue.getChildren().clear();
+            CenterValue.getChildren().addAll(tableview);
+        });
+        ButtBusyTime.setOnAction(e -> {
+            tableview = new TableView();
+            buildData(BusyTimeDay);
+            CenterValue.getChildren().clear();
+            CenterValue.getChildren().addAll(tableview);
+        });
+
+        Left.getChildren().addAll(ButtGenOrdHist, ButtOrdPrice, ButtMoreOrder,ButtLessOrder,ButtBusyTime);
 
         VBox Right = new VBox();
         Label Stuff = new Label("                 ");

@@ -113,7 +113,7 @@ public class Main extends Application{
         gr1.setMargin(btnpickup, new Insets(10,10,10,10));
         gr1.setMargin(btndelivery, new Insets(10,10,10,520));
 
-        Image mainImg = new Image("img/logo.png");
+        Image mainImg = new Image("img/hinsgarden.png");
         ImageView iv2 = new ImageView();
         iv2.setImage(mainImg);
 
@@ -191,11 +191,11 @@ public class Main extends Application{
         logButt.setAlignment(Pos.CENTER);
         GridPane.setConstraints(logButt, 1, 4);
 
-        Image disImg = new Image("img/takeout.png");
+        Image disImg = new Image("img/hinsgarden.png");
         ImageView iv1 = new ImageView();
         iv1.setImage(disImg);
-        iv1.setFitHeight(200);
-        iv1.setFitWidth(200);
+        iv1.setFitHeight(100);
+        iv1.setFitWidth(300);
         GridPane.setConstraints(iv1, 1, 0);
 
         grid.getChildren().addAll(userLabel, userIn, passLabel, passIn, logButt, iv1);
@@ -212,12 +212,12 @@ public class Main extends Application{
                     System.out.println("Success!");
                     window.setScene(scene1);
                 } else if ((userIn.getText() != null && userIn.getText().contains("Employee"))
-                        && passIn.getText().contains("Employee")) {
+                        && passIn.getText().contains("password")) {
                     System.out.println("Success!");
-                    window.setScene(scene2);
+                    window.setScene(scene1);
                 } else {
 
-                    System.out.println("looololol, try 'a' in both fields or 'Customer' in both fields");
+                    System.out.println("please try 'a' in both fields or 'Employee' in both fields");
 
                 }
 
