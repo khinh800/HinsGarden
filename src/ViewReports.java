@@ -333,25 +333,25 @@ public class ViewReports {
         //=======PERFORM BUTTON ACTION, make tables
         ButtDay.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(OrderHistory);
+            buildData(MoneyDay);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
         ButtWeek.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(OrderHistory);
+            buildData(MoneyWeek);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
         ButtMonth.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(OrderHistory);
+            buildData(MoneyMonth);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
         ButtYear.setOnAction(e -> {
             tableview = new TableView();
-//            buildData(OrderHistory);
+            buildData(MoneyYear);
             CenterValue.getChildren().clear();
             CenterValue.getChildren().addAll(tableview);
         });
