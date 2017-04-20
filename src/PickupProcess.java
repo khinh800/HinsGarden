@@ -9,6 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 /**
  * Created by Pho on 4/6/17.
  */
@@ -85,15 +89,34 @@ public class PickupProcess {
 
 
         btnsearch.setOnAction(e-> {
-            boolean customerexist=false;
-            if (customerexist == false){
-                //leave this scene section blank, fill in all that is required
-                System.out.println("You will display empty fields");
+            long phonenumber = Long.parseLong(textsearch.getText());
+            Connection c;
+            try{
+                c = DataBaseConnection.connect();
+                String PhoneSearch = "SELECT cpn.customerphonenumberid "
+                        + "FROM customerphonenumber as cpn "
+                        + "INNER JOIN customer as c ON cpn.customerphonenumberID = c.customerphonenumberID "
+                        + "INNER JOIN customeraddress as ca ON cpn.customerphonenumberid = ca.customerphoennumberid "
+                        + "WHERE cpn.customerphonenumber = %" + phonenumber +"%";
+                //customer- first name, last name, address, phone number
+                //customer order
+                ResultSet rs = c.createStatement().executeQuery(PhoneSearch);
+                if (!rs.isBeforeFirst()){
+                    //leave this scene section blank, fill in all that is required
+                    System.out.println("You will display empty fields");
+                }
+                else{
+                    //fill in the necessary data for this section based on info from the database
+                    System.out.println("You grab data from the database that matches the phone number and populate fields");
+                }
             }
-            else{
-                //fill in the necessary data for this section based on info from the database
-                System.out.println("You grab data from the database that matches the phone number and populate fields");
+            catch (Exception a){
+                a.printStackTrace();
+                System.out.println("Error, prob doesn't exist");
             }
+
+
+
         });
 
 
