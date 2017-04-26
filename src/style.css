@@ -9,6 +9,35 @@
     -fx-min-width: 150px;
     -fx-max-width: 150px;
 }
+.mmbutton:hover{
+    -fx-background-color: orange;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+.mainbutton {
+    -fx-font-size: 20px;
+    -fx-border-radius: 20;
+    -fx-background-radius: 0;
+    -fx-background-color: #ff4500;
+    -fx-text-fill: white;
+    -fx-min-height: 100px;
+    -fx-max-height: 100px;
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+}
+.mainbutton:hover{
+    -fx-background-color: orange;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
 .boxcolor{
     -fx-background-color: darkred;
 }

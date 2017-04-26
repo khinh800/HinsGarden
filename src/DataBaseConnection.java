@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class DataBaseConnection {
 
     private static Connection conn;
-    private static String url = "jdbc:sqlserver://localhost\\CoT-CIS3365-14:1433;databaseName=HinsGarden_Database;user=admin;password=admin;";
+//    private static String url = "jdbc:sqlserver://localhost\\CoT-CIS3365-14:1433;databaseName=HinsGarden_Database;user=admin;password=admin;";
+    private static String url = "jdbc:postgresql://localhost:5432/HinsGarden_Database";
 
     public static Connection connect() throws SQLException {
         try {
@@ -23,7 +24,7 @@ public class DataBaseConnection {
             System.err.println("Error: " + iae.getMessage());
         }
 
-        conn = DriverManager.getConnection(url);
+        conn = DriverManager.getConnection(url,"admin","admin");
         return conn;
     }
 

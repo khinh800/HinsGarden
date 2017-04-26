@@ -7,5 +7,11 @@
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
       <jdbc-url>jdbc:sqlserver://localhost\CoT-CIS3365-14:1433;databaseName=HinsGarden_Database</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="HinsGarden_Database@localhost [2]" uuid="7ea57981-18f3-4814-b153-d9a2c91607a4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/HinsGarden_Database</jdbc-url>
+    </data-source>
   </component>
 </project>

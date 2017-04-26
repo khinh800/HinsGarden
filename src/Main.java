@@ -15,8 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -137,8 +136,8 @@ public class Main extends Application{
 
         scene1=new Scene(anc, 1000,600);
 
-        btnpickup.setOnAction(e -> PickupProcess.Pickup());
-        btndelivery.setOnAction(e -> PickupProcess.Delivery());
+        btnpickup.setOnAction(e -> PickupProcess.PickUp());
+        btndelivery.setOnAction(e -> DeliveryProcess.Delivery());
         btnmanager.setOnAction(e -> Manager.managermenu());
         btn2.setOnAction(e -> handleButtonAction(e));
         btn1.setOnAction(e -> handleButtonAction(e));
@@ -152,13 +151,7 @@ public class Main extends Application{
         grid.setStyle("-fx-background-color: antiquewhite");
         grid.setAlignment(Pos.CENTER);
 
-		/*
-		 * ==================WINDOW DISPLAY================ This sets up the
-		 * scenes and shows the windows.
-		 */
-        Scene logMenu = new Scene(grid, 400, 400);
-        window.setScene(logMenu);
-        window.show();
+
 
         // Name Label, placed in grid 0, 0
         Label userLabel = new Label("Username");
@@ -186,7 +179,7 @@ public class Main extends Application{
 
         // Login Button,
         Button logButt = new Button("Login");
-        logButt.setStyle("-fx-font: 16.5 arial; -fx-base: #ff4500");
+        logButt.setStyle("-fx-font: 16.5 arial; -fx-base: #ff4500; -fx-text-fill: white;");
         logButt.setMinWidth(250);
         logButt.setAlignment(Pos.CENTER);
         GridPane.setConstraints(logButt, 1, 4);
@@ -199,6 +192,31 @@ public class Main extends Application{
         GridPane.setConstraints(iv1, 1, 0);
 
         grid.getChildren().addAll(userLabel, userIn, passLabel, passIn, logButt, iv1);
+
+        BorderPane newLogin = new BorderPane();
+        VBox newvbox = new VBox();
+        HBox box1 = new HBox();
+        HBox box2 = new HBox();
+        box1.setSpacing(10);
+        box2.setSpacing(10);
+        box1.getChildren().addAll(userLabel, userIn);
+        box2.getChildren().addAll(passLabel, passIn);
+        newvbox.setSpacing(10);
+        newvbox.getChildren().addAll(iv1,box1,box2,logButt);
+        box1.setAlignment(Pos.CENTER);
+        box2.setAlignment(Pos.CENTER);
+        newLogin.setStyle("-fx-background-color: antiquewhite;");
+
+        newvbox.setAlignment(Pos.CENTER);
+        newLogin.setCenter(newvbox);
+
+        /*
+		 * ==================WINDOW DISPLAY================ This sets up the
+		 * scenes and shows the windows.
+		 */
+        Scene logMenu = new Scene(newLogin, 400, 400);
+        window.setScene(logMenu);
+        window.show();
 				/*
 				 * ==================================CONDITIONAL
 				 * LOGIN==============================================
