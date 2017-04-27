@@ -226,16 +226,18 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent e) {
 
-                if ((userIn.getText() != null && userIn.getText().contains("a")) && passIn.getText().contains("a")) {
+                if ((userIn.getText() != null && userIn.getText().contains("Employee")) && passIn.getText().contains("Employee")) {
                     System.out.println("Success!");
+                    anc.getChildren().remove(btnmanager);
+                    anc.getChildren().remove(btnreports);
                     window.setScene(scene1);
-                } else if ((userIn.getText() != null && userIn.getText().contains("Employee"))
+                } else if ((userIn.getText() != null && userIn.getText().contains("Manager"))
                         && passIn.getText().contains("password")) {
                     System.out.println("Success!");
                     window.setScene(scene1);
                 } else {
 
-                    System.out.println("please try 'a' in both fields or 'Employee' in both fields");
+                    System.out.println("please try 'a' in both fields or 'manager' in both fields");
 
                 }
 

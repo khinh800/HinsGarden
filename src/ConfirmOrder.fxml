@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: antiquewhite;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfirmController">
+   <right>
+      <VBox prefHeight="350.0" prefWidth="121.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="50.0" right="20.0" top="50.0" />
+         </BorderPane.margin>
+         <children>
+            <Button mnemonicParsing="false" onAction="#ConfirmOrder" prefHeight="81.0" prefWidth="129.0" style="-fx-background-color: #FF4500;" text="Confirm &#10;Order" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #FFBB43;" text="Edit" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #BD87D1;" text="Delete" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#cancel" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #D16565;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+   <top>
+      <Label text="Confirm Order" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="351.0" prefWidth="367.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView prefHeight="249.0" prefWidth="347.0">
+              <columns>
+                <TableColumn prefWidth="223.0" text="Menu Item" />
+                <TableColumn prefWidth="122.0" text="Price" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </TableView>
+            <Label text="Total: $0.00">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="200.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

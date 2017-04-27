@@ -1,5 +1,8 @@
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -123,9 +127,14 @@ public class PhoneSearch {
                     catch(SQLException a){
                         System.out.println("You got an error while running the submit button");
                     }
-                    OrderMenu.AddOrder(5);
+                    //OrderMenu.AddOrder(5);
                     System.out.println("Testing stuff");
                     window.close();
+                    try{showmenu();}
+                    catch(Exception b){
+                        System.out.println(b);
+                        System.out.println("Nothing is working");
+                    }
                 });
             }
             else{
@@ -230,9 +239,15 @@ public class PhoneSearch {
                     catch(SQLException a){
                         System.out.println("You got an error while running the submit button");
                     }
-                    OrderMenu.AddOrder(5);
+                    //OrderMenu.AddOrder(5);
                     System.out.println("Testing pickups ");
                     window.close();
+                    try{
+                        showmenu();
+                    }
+                    catch(Exception b){
+                        System.out.println(b);
+                    }
                 });
             }
             else{
@@ -249,6 +264,12 @@ public class PhoneSearch {
             PickupProcess.PickUp();
         });
     }
-
+    public static void showmenu() throws Exception{
+        Stage window = new Stage();
+        Parent root = FXMLLoader.load(Main.class.getResource("ordermenu.fxml"));
+        Scene scene2 = new Scene(root,600,400 );
+        window.setScene(scene2);
+        window.show();
+    }
 
 }

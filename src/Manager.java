@@ -4,10 +4,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,11 +24,13 @@ import java.sql.Statement;
 public class Manager {
     private static ObservableList<ObservableList> data;
     private static TableView tableview;
+    private static ComboBox<String> DelEmp;
 
     public static void managermenu() {
-        String SQL = "SELECT Employee.EmployeeFirstName, Employee.EmplyoeeLastName, EmployeeType.EmployeeType"
+        String SQL = "SELECT Employee.EmployeeFirstName, Employee.EmployeeLastName, EmployeeType.EmployeeType"
                 + " FROM Employee" +
-                " ";
+                " JOIN EmployeeType on EmployeeType.employeetypeid = Employee.employeetypeid ORDER BY employee.employeeid asc";
+
         Stage window = new Stage();
         BorderPane bp = new BorderPane();
         TabPane tabPane = new TabPane();
@@ -56,6 +60,18 @@ public class Manager {
         VBox vertaddemp = new VBox();
         vertaddemp.setPadding(new Insets(20, 50, 50, 20));
 
+        String EmpSQL = "SELECT * FROM employee";
+        String MangSQL = "SELECT * FROM manager";
+        String MenuSQL = "SELECT * FROM  menuitems";
+
+
+        BorderPane emptable = new BorderPane();
+        tableview = new TableView();
+        tableview.setMinWidth(580);
+        buildData(EmpSQL);
+        emptable.setCenter(tableview);
+        tab1.setContent(emptable);
+
         //Show add employee
         Label lfirstname = new Label("Employee First Name");
         Label llastname = new Label("Employee Last Name");
@@ -68,18 +84,17 @@ public class Manager {
         vertaddemp.getChildren().add(successadded);
         tab2.setContent(vertaddemp);
 
+        VBox deletevbox = new VBox();
+        HBox rowdelete = new HBox();
+        Button DeleteStuff = new Button("Delete");
+        DelEmp = comboboxstuff(SQL);
+        rowdelete.getChildren().addAll(DelEmp,DeleteStuff);
+        deletevbox.getChildren().add(rowdelete);
+        deletevbox.setAlignment(Pos.TOP_CENTER);
 
-        String EmpSQL = "SELECT * FROM employee";
-        String MangSQL = "SELECT * FROM manager";
-        String MenuSQL = "SELECT * FROM  menuitems";
+        tab3.setContent(deletevbox);
 
 
-        BorderPane emptable = new BorderPane();
-        tableview = new TableView();
-        tableview.setMinWidth(580);
-        buildData(EmpSQL);
-        emptable.setCenter(tableview);
-        tab1.setContent(emptable);
 
         VBox verticalbox = new VBox();
         verticalbox.getChildren().addAll(btn1,btn2,btn3,btn4);
@@ -202,8 +217,25 @@ public class Manager {
         btn4.setOnAction(e->{
             window.close();
         });
+        DeleteStuff.setOnAction(e->{
+            int indexid = DelEmp.getSelectionModel().getSelectedIndex()+1;
+            if (DelEmp.getSelectionModel().getSelectedItem() != null){
+                try{
+                    Connection c = DataBaseConnection.connect();
+                    Statement stmt = c.createStatement();
+                    String DeleteEmp = "DELETE FROM employee WHERE employeeid = "+indexid+"";
+                    //stmt.executeUpdate(DeleteEmp);
+                } catch(SQLException c){
+
+                }
+            }
+            System.out.println(indexid);
+
+        });
 
     }
+
+
 
     public static void buildData(String InsertSql) {
         Connection c;
@@ -242,7 +274,7 @@ public class Manager {
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     // Iterate Column
-                    String notthere = "null";
+                    String notthere = "nil";
                     rs.getString(i);
                     if (rs.wasNull()) {
                         row.add(notthere);
@@ -263,4 +295,36 @@ public class Manager {
         }
 
     }
-}
+
+    public static ComboBox<String> comboboxstuff(String SQL){
+        final ObservableList options = FXCollections.observableArrayList();
+        try {
+
+
+            // This creates a connection to the
+            Connection c = DataBaseConnection.connect();
+            ResultSet rs = c.createStatement().executeQuery(SQL);
+
+				/*
+				 * This loop goes through the column Address in Location table.
+				 * -rs.next goes to the next iteration of the row; -Address =
+				 * rs.getString(1) means the second column (java starts count at
+				 * 0) gets put into the Address String. -dankbox (ComboBox) adds
+				 * the Address string to its list.
+				 */
+            String Name = null;
+            while (rs.next()) {
+                Name = rs.getString(1) + " " + rs.getString(2);
+                options.add(Name);
+            }
+
+        } catch (SQLException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+        DelEmp= new ComboBox<>(options);
+        DelEmp.setPromptText("Select Delete Option");
+
+        return DelEmp;
+
+    }}
